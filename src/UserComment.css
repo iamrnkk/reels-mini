@@ -1,0 +1,29 @@
+.user-comment
+{
+    height: 5rem;
+    margin-top: 3px; 
+    display: flex;
+    align-items: center;
+}
+
+.display-picture
+{
+    height: 4rem;
+    width: 4rem;
+}
+
+.user-comment-text
+{
+  margin-top: 1rem;
+  margin-left: 8px;
+  overflow: hidden;
+  width: calc(100% - 4rem);
+  /* color: #628bb4; */
+}
+
+.user-comment-text h6
+{
+    margin-bottom: 0.05rem;
+    overflow: hidden;
+    color: #0c3966;
+}
