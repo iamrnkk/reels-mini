@@ -41,24 +41,50 @@ video
     cursor: default;
 }
 
-.video-like
+.video-card-options
 {
     position: absolute;
-    bottom: 5rem;
-    right: 12px;
-    color: red;
-    font-size: 28px;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    top: calc(50% - 165px);
+    right: 2%;
+    align-items: center;
+    justify-content: space-between;
+    height: 160px;
+    
+}
 
+.video-like
+{
+    color: red;
+    font-size: 30px;
+    cursor: pointer;
+    
 }
 
 .video-comment
 {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 12px;
-    font-size: 28px;
-    color: #0c3966;
+   
+    font-size: 30px;
+    color: white;
     cursor: pointer;
-    
+    height: 30px;
+}
+.upload
+{
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.account
+{
+    font-size: 30px;
+    color: white;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
 }
