@@ -16,7 +16,6 @@ const Home= ()=>{
                 arr.push({id: doc.id,...doc.data()});
             }
             setPosts(arr);
-            console.log(arr);
         });
         
         return ()=>{unsub()};

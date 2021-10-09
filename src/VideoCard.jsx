@@ -9,7 +9,7 @@ const VideoCard= (props)=>{
     const user= useContext(authContext);
     let [playing, setPlaying] = useState(false);
     let [commentBoxOpen, openCommentBox]= useState(false);
-
+    let currUserLiked= props.data.likes.includes(user.uid);
     return <>
         <div className="video-card">
             <video 
@@ -52,7 +52,14 @@ const VideoCard= (props)=>{
                     });
                     }}/>
                 <label htmlFor="file-upload"><span className="material-icons-outlined upload">add_box</span></label>
-                <span className="video-like material-icons">favorite_border</span>
+                <span onClick={()=>{
+                    let likesArr=props.data.likes;
+
+                    if(currUserLiked) likesArr= likesArr.filter((el)=>el!==user.uid);
+                    else likesArr.push(user.uid);
+                    
+                    firestore.collection("posts").doc(props.data.id).update({likes:likesArr});
+                }} className="video-like material-icons">{currUserLiked? "favorite":"favorite_border"}</span>
                 <span onClick={ ()=>{ if(commentBoxOpen) openCommentBox(false); else openCommentBox(true); }}className="video-comment comment material-icons"><h3>chat_bubble_outline</h3></span>
                 <span className="material-icons-outlined account">account_circle</span>
             </div>
