@@ -3,13 +3,15 @@ import { createContext, useContext, useState } from "react";
 import CommentBox from "./CommentBox";
 import { firestore, storage } from "./firebase";
 import { authContext } from "./AuthProvider";
+import { Link } from "react-router-dom";
 
 let commentBoxOpenContext= createContext();
 const VideoCard= (props)=>{
     const user= useContext(authContext);
     let [playing, setPlaying] = useState(false);
     let [commentBoxOpen, openCommentBox]= useState(false);
-    let currUserLiked= props.data.likes.includes(user.uid);
+    let currUserLiked;
+    if(user) currUserLiked=props.data.likes.includes(user.uid);
     return <>
         <div className="video-card">
             <video 
@@ -46,8 +48,16 @@ const VideoCard= (props)=>{
                     
                     let uploadTask= storage.ref(`/posts/${user.uid}/${Date.now()+"-"+name}`).put(videoObj);
                     uploadTask.on("state_changed",null,null,()=>{
-                        uploadTask.snapshot.ref.getDownloadURL().then((url)=>{
-                            firestore.collection("posts").add({name: user.displayName,url,comments: [],likes: []});
+                        uploadTask.snapshot.ref.getDownloadURL().then(async (url)=>{
+                            const postsDocRef= await firestore.collection("posts").add({name: user.displayName,url,comments: [],likes: []});
+                            const postsDoc=  await postsDocRef.get();
+                            const postId= postsDoc.id;
+
+                            const userDoc= await firestore.collection("users").doc(user.uid).get();
+                            let postsArr= userDoc.data().posts;
+                            postsArr.push(postId);
+                            
+                            await firestore.collection("users").doc(user.uid).update({posts: postsArr});
                             });
                     });
                     }}/>
@@ -61,7 +71,7 @@ const VideoCard= (props)=>{
                     firestore.collection("posts").doc(props.data.id).update({likes:likesArr});
                 }} className="video-like material-icons">{currUserLiked? "favorite":"favorite_border"}</span>
                 <span onClick={ ()=>{ if(commentBoxOpen) openCommentBox(false); else openCommentBox(true); }}className="video-comment comment material-icons"><h3>chat_bubble_outline</h3></span>
-                <span className="material-icons-outlined account">account_circle</span>
+                <Link className="material-icons-outlined account" to="/profile">account_circle</Link>
             </div>
             <commentBoxOpenContext.Provider value={{data: props.data,commentBoxOpen, openCommentBox}}>
                {commentBoxOpen? <CommentBox />:"" }

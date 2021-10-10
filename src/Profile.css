@@ -1,0 +1,91 @@
+
+.profile-card
+{
+    margin: auto;
+    height: 100vh;
+    width: 35vw;
+    background-color: #bbc9d6;
+    box-shadow: 0px 0px 8px 2px #5d5757;
+}
+
+.profile-header
+{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 35%;
+    color: #0c3966 !important;
+}
+
+.profile-picture-holder
+{
+    height: 5.5rem;
+    width: 5.5rem;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px 1px #0c3966;
+
+}
+
+.profile-picture
+{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+}
+.profile-btn-holder
+{
+    display: flex;
+    width:5rem;
+    justify-content: space-between;
+
+}
+.profile-btn
+{
+    box-shadow: 0px 0px 10px 1px #0c3966;
+    height:2rem;
+    width:2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none !important;
+    color: #0c3966 !important;
+}
+.profile-body
+{
+    height: 65%;
+}
+
+.profile-body-title
+{
+    text-align: center;
+    box-shadow: -1px -1px 5px 0px #0c3966;
+    color: #0c3966;
+    margin: 0;
+}
+
+.reel-container
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile-reel
+{
+    height:29.5vh;
+    width: 11.666vw;
+    position: relative;
+}
+
+video
+{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+}

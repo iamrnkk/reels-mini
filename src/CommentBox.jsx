@@ -54,7 +54,6 @@ const CommentBox= ()=>{
                 
                 const postDoc= await firestore.collection("posts").doc(valueObject.data.id).get();
                 let commentsArr=postDoc.data().comments;
-                console.log(commentId);
                 commentsArr.push(commentId);
 
                 await firestore.collection("posts").doc(valueObject.data.id).update({ comments: commentsArr});
