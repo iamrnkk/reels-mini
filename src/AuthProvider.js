@@ -15,8 +15,12 @@ const AuthProvider= (props)=>{
 
                 const docRef= firestore.collection("users").doc(uid);
                 const docSnapShot = await docRef.get();
-                if(!docSnapShot.exists) docRef.set({displayName, email, photoURL,posts:[]});
-                let posts= docSnapShot.data().posts;
+                let posts=[];
+                if(!docSnapShot.exists)  
+                {
+                    await docRef.set({displayName, email, photoURL,posts:[]});
+                }
+                else posts= docSnapShot.data().posts;
                 setUser({displayName, email, uid , photoURL, posts});
             }
             else setUser(null);

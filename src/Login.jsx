@@ -6,8 +6,6 @@ import "./Login.css";
 
 const Login = ()=>{
     const user= useContext(authContext);
-    console.log(user);
-
     return <>
             { user ? <Redirect to="/"/> : ""}
             <div className="login"> 
