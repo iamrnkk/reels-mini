@@ -8,7 +8,6 @@ import "./Profile.css"
 const Profile= ()=>{
     const user= useContext(authContext);
     if(!user) <Redirect to="/login"/>;
-    console.log(user);
     let [posts,setPosts]= useState([]);
     useEffect(()=>{
         if(user)
